@@ -13,6 +13,10 @@ function toggleCreateTodoForm() {
     }
 }
 
+function sortTodoList(){
+    //order,childElementCount
+}
+
 function createTodo() {
     const todoContentElement = document.getElementById('todo-content');
     todoContent = todoContentElement.value;
@@ -80,4 +84,8 @@ function invisiblePlusImage() {
 
 function visiblePlusImage() {
     plusButton.style.display = 'block';
+}
+
+function countTodo(){
+    return document.getElementById('todo-container').childElementCount;
 }
