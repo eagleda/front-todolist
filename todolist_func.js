@@ -13,8 +13,16 @@ function toggleCreateTodoForm() {
     }
 }
 
-function sortTodoList(){
-    //order,childElementCount
+function reverseTodoList(){
+    const todoContentList=document.getElementsByClassName('todo-text');
+    let List=[];
+    for(let i=0;i<countTodo();i++){
+        List.push(todoContentList[i].innerText)
+    }
+    for(let i=0;i<countTodo();i++){
+        document.getElementsByClassName('todo-text')[i].innerText=List[countTodo()-1-i];
+        console.log(countTodo(),List[countTodo()-1-i]);
+    }
 }
 
 function createTodo() {
@@ -86,6 +94,6 @@ function visiblePlusImage() {
     plusButton.style.display = 'block';
 }
 
-function countTodo(){
+function countTodo(){ 
     return document.getElementById('todo-container').childElementCount;
 }
