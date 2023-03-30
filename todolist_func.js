@@ -21,7 +21,6 @@ function reverseTodoList(){
     }
     for(let i=0;i<countTodo();i++){
         document.getElementsByClassName('todo-text')[i].innerText=List[countTodo()-1-i];
-        console.log(countTodo(),List[countTodo()-1-i]);
     }
 }
 
