@@ -57,6 +57,7 @@ html, body {
 .button-group {
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
 }
 .head-button-group{
@@ -104,6 +105,7 @@ html, body {
 }
 
 .delete-button {
+    font-size: 20px;
     cursor: pointer;
     border: none;
     background: #FFFFFF;
@@ -111,4 +113,11 @@ html, body {
 
 #new-schedule {
     padding-bottom: 10px;
+}
+
+#edit-button{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    padding: 0px 1rem 0px 0px; /*rem: 폰트사이즈 배수*/
 }

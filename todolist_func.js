@@ -48,8 +48,11 @@ function createTodo() {
         const todo = document.createElement('div');
         todo.className = "todo";
         todo.innerHTML =
-            `<div class='todo-text'>${todoContent}</div>
-            <button class='delete-button' onclick='removeSchedule(this)'>x</button>`;
+            `<div class='todo-text' style='visibility: visible'>${todoContent}</div>
+            <div class='button-group' style='visibility: visible'>
+                <img id="edit-button" src="image\\edit_todo_content_button_image.png" onclick="openTodoEditor(this)">
+                <button class='delete-button' onclick='removeSchedule(this)'>x</button>
+            </div>`;
         return todo;
     }
 
@@ -69,7 +72,7 @@ function createTodo() {
 }
 
 function removeSchedule(deleteButton) {
-    deleteButton.parentElement.remove();
+    deleteButton.parentElement.parentElement.remove();
 
     if (isTodoListEmpty()) {
         showEmptyNotice();
@@ -95,4 +98,24 @@ function visiblePlusImage() {
 
 function countTodo(){ 
     return document.getElementById('todo-container').childElementCount;
+}
+
+function openTodoEditor(editButton){
+    toggleTodo(editButton.parentElement.parentElement);
+}
+
+function toggleTodo(todo){ // style은 인라인된 것만 가져옴: getComputedStyle() 시도해보자..
+    let children=todo.childNodes;
+    console.log(children);
+    for(const node of children){
+        if(node.className=='todo-text'||node.className=='button-group'){
+            if(node.style.visibility=="visible"){
+                console.log('yes');
+                node.style.visibility='hidden';
+            } else{
+                console.log('no');
+                node.style.visibility='visible';
+            }
+        }
+    }
 }
