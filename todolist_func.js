@@ -69,7 +69,7 @@ function createTodo() {
 }
 
 function removeSchedule(deleteButton) {
-    deleteButton.parentElement.parentElement.remove();
+    getGrandParent(deleteButton).remove();
 
     if (isTodoListEmpty()) {
         showEmptyNotice();
@@ -98,13 +98,13 @@ function countTodo() {
 }
 
 function openTodoEditor(editButton) {
-    const editedTodo = editButton.parentElement.parentElement
+    const editedTodo = getGrandParent(editButton)
     toggleTodo(editedTodo);
 
     const text = document.createElement('input');
     text.type = 'text';
     text.style.width = '50%';
-    text.id = 'edited-content'
+    text.id = 'editing-content'
     const buttonGroup = document.createElement('div');
     buttonGroup.className = 'button-group';
     buttonGroup.id = 'todo-button-group';
@@ -115,26 +115,21 @@ function openTodoEditor(editButton) {
         `;
     editedTodo.appendChild(text);
     editedTodo.appendChild(buttonGroup);
-
-
-
 }
 
 function editTodo(editAdd) {
-    const editedTodo = editAdd.parentElement.parentElement;
-    const editingTodoContent = editedTodo.querySelector("#edited-content");
+    const editedTodo = getGrandParent(editAdd);
+    const editingTodoContent = editedTodo.querySelector("#editing-content");
     editingTodoContentValue = editingTodoContent.value;
     const editedText = editedTodo.querySelector(".todo-text");
     editedText.innerText = editingTodoContentValue;
     clearTodoContent(editingTodoContent);
     toggleTodo(editedTodo);
     removeTodoEditor(editedTodo);
-
-
 }
 
-function cancelTodoEdit(cancelBtn) {
-    const editedTodo = cancelBtn.parentElement.parentElement;
+function cancelTodoEdit(CancelEditBtn) {
+    const editedTodo = getGrandParent(CancelEditBtn);
     toggleTodo(editedTodo);
     removeTodoEditor(editedTodo);
 }
@@ -154,9 +149,12 @@ function clearTodoContent(todoContentElement) {
 }
 
 function removeTodoEditor(editedTodo) {
-    const editingTodoContent = editedTodo.querySelector("#edited-content");
+    const editingTodoContent = editedTodo.querySelector("#editing-content");
     const buttonGroup = editedTodo.querySelector("#todo-button-group");
     editingTodoContent.remove();
     buttonGroup.remove();
+}
 
+function getGrandParent(object){
+    return object.parentElement.parentElement;
 }
