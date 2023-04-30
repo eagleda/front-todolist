@@ -1,5 +1,22 @@
+
 const emptyNotice = document.getElementById('empty-notice');
 const plusButton = document.getElementById('plus-button');
+const todoContentList = document.getElementsByClassName('todo-text');
+window.onload = pageLoad;
+function pageLoad(){
+    for(let i=0;i<window.localStorage.length;i++){
+        console.log(window.localStorage.getItem(i));
+    }
+    window.localStorage.clear();
+}
+
+window.onunload = pageUnload;
+function pageUnload(){
+    for (let i = 0; i < countTodo(); i++) {
+       window.localStorage.setItem(i,document.getElementsByClassName('todo-text')[i].innerText)
+    }
+}
+
 
 function toggleCreateTodoForm() {
     const createTodoForm = document.getElementById('todo-form');
@@ -13,8 +30,7 @@ function toggleCreateTodoForm() {
     }
 }
 
-function reverseTodoList() {
-    const todoContentList = document.getElementsByClassName('todo-text');
+function reverseTodoList() { 
     let List = [];
     for (let i = 0; i < countTodo(); i++) {
         List.push(todoContentList[i].innerText)
