@@ -6,8 +6,43 @@ window.onload = pageLoad;
 function pageLoad(){
     for(let i=0;i<window.localStorage.length;i++){
         console.log(window.localStorage.getItem(i));
+        createTodoforLoad(window.localStorage.getItem(i));
     }
     window.localStorage.clear();
+}
+
+function createTodoforLoad(savedElement) {
+    todoContent = savedElement;
+
+    const todo = createTodoElement(todoContent);
+    appendTodo(todo);
+
+    if (!isTodoListEmpty()) {
+        removeEmptyNotice();
+    }
+
+    function createTodoElement(todoContent) {
+        const todo = document.createElement('div');
+        todo.className = "todo";
+        todo.innerHTML =
+            `<div class='todo-text' style='display: block'>${todoContent}</div>
+            <div class='button-group' style='display: block'>
+                <img id="edit-button" src="image\\edit_todo_content_button_image.png" onclick="openTodoEditor(this)">
+                <button class='delete-button' onclick='removeSchedule(this)'>x</button>
+            </div>`;
+        return todo;
+    }
+
+    function appendTodo(todo) {
+        const todoContainer = document.getElementById("todo-container");
+        todoContainer.appendChild(todo);
+    }
+
+
+    function removeEmptyNotice() {
+        emptyNotice.style.display = 'none';
+    }
+
 }
 
 window.onunload = pageUnload;
